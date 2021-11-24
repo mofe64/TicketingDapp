@@ -1,0 +1,48 @@
+.form-header {
+  margin-top: 3rem;
+}
+.createform {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-div {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.form-div input {
+  width: 60%;
+  border: none;
+  outline: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 5px;
+  padding-left: 0.6rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.checkbox-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.checkbox-div p {
+  margin-right: 1rem;
+}
+.btn-ctn {
+  width: 100%;
+  margin-top: 1rem;
+}
+.list-btn {
+  padding: 1rem 2rem;
+  border: none;
+  outline: none;
+  color: black;
+  background: gold;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}

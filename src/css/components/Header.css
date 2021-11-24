@@ -1,0 +1,29 @@
+.header {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.header-links a {
+  text-decoration: none;
+  color: black;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+.header-links a:hover {
+  color: gold;
+}
+.header-buttons button {
+  padding: 1rem 1.5rem;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all ease-in 0.3s;
+}
+.header-buttons button:hover {
+  transform: scale(1.1);
+  background-color: gold;
+}

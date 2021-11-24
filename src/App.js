@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import { DAppProvider, ChainId } from "@usedapp/core";
+import ListEvent from "./pages/ListEvent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DAppProvider
+      config={{ supportedChains: [ChainId.Rinkeby, ChainId.Kovan, 1337] }}
+    >
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/new" component={ListEvent} />
+      </Switch>
+    </DAppProvider>
   );
 }
 
