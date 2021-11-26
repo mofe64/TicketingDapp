@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
 import marketAbi from "../abi/Market.json";
 export const marketContractAddress =
-  "0xb05142B2a33b3ABd164369dE2E05DB6f2C9b1942";
+  "0xA8CBAD93e2cD56546300fc3FC55709AfE3126cCF";
 export const marketContractInterface = new ethers.utils.Interface(
   marketAbi.abi
 );
+// const CURRENTLIVECONTRACTADDRESS = 0xA8CBAD93e2cD56546300fc3FC55709AfE3126cCF;

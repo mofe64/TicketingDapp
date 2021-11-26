@@ -1,34 +1,15 @@
 import Header from "../components/Header";
 import "../css/pages/Home.css";
-// eslint-disable-next-line
-import { ethers } from "ethers";
-import { useContractCall } from "@usedapp/core";
-import {
-  marketContractAddress,
-  marketContractInterface,
-} from "../util/Constants";
+import { useWeb3React } from "@web3-react/core";
 
 const Home = function () {
-  const owner = useContractCall({
-    abi: marketContractInterface,
-    address: marketContractAddress,
-    method: "owner",
-    args: [],
-  });
-  console.log(owner);
-  const allEvents = useContractCall({
-    abi: marketContractInterface,
-    address: marketContractAddress,
-    method: "getAllEvents",
-    args: [],
-  });
-  let latestEvents;
-  if (allEvents !== undefined && allEvents.length > 0) {
-    latestEvents = [...allEvents[0]];
-    latestEvents = latestEvents.reverse().slice(-15);
-    // console.log("test", latestEvents);
+  const web3 = useWeb3React();
+  const latestEvents = [];
+  const allEvents = [];
+  const owner = "xxx";
+  if (web3.library !== undefined) {
+    console.log(web3.library.utils.fromWei("2000000000", "ether"));
   }
-
   return (
     <>
       <Header />
