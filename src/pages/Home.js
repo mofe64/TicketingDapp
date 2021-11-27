@@ -4,8 +4,10 @@ import { useWeb3React } from "@web3-react/core";
 import { useCallback, useEffect, useState } from "react";
 import marketInterface from "../abi/Market.json";
 import { marketContractAddress } from "../util/Constants";
+import { useHistory } from "react-router";
 
 const Home = function () {
+  const history = useHistory();
   const web3 = useWeb3React();
   const [latestEvents, setLatestEvents] = useState([]);
   const owner = "xxx";
@@ -37,7 +39,7 @@ const Home = function () {
           {latestEvents !== undefined && latestEvents.length > 0 && (
             <div className="events-all">
               {latestEvents.map((event, index) => {
-                // console.log(event);
+                console.log(event);
                 return (
                   <div className="event-tile" key={index}>
                     <p>
@@ -50,7 +52,14 @@ const Home = function () {
                       Price :<span> {event["price"].toString()} </span>
                     </p>
                     <div className="event-tile-btns">
-                      <button className="btn-details">More Details</button>
+                      <button
+                        className="btn-details"
+                        onClick={() => {
+                          history.push(`/${event["id"]}`);
+                        }}
+                      >
+                        More Details
+                      </button>
                       <button className="btn-buy">Buy Now</button>
                     </div>
                   </div>

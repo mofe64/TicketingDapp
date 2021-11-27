@@ -3,6 +3,7 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ListEvent from "./pages/ListEvent";
+import Event from "./pages/Event";
 import Web3 from "web3";
 import { Web3ReactProvider } from "@web3-react/core";
 import { MetaMaskProvider } from "./hooks/useMetaMask";
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/new" component={ListEvent} />
+          <Route exact path="/:eventId" component={Event} />
         </Switch>
       </MetaMaskProvider>
     </Web3ReactProvider>

@@ -55,6 +55,7 @@ const ListEvent = function () {
         true
       );
     }
+    setLoading(true);
     const marketContract = new web3.library.eth.Contract(
       marketInterface.abi,
       marketContractAddress
@@ -74,8 +75,10 @@ const ListEvent = function () {
           value: web3.library.utils.toWei("0.00025", "ether"),
         });
       console.log(tx);
+      setLoading(false);
       notify("Event Listed successfully", false);
     } catch (error) {
+      setLoading(false);
       notify(error.message, true);
     }
   };
