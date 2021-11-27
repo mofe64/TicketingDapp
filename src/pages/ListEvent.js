@@ -1,21 +1,16 @@
 import { useState } from "react";
 import Header from "../components/Header";
-import { ethers } from "ethers";
-import { Contract } from "@ethersproject/contracts";
 import "../css/pages/ListEvent.css";
 import { useHistory } from "react-router";
-import { useContractFunction } from "@usedapp/core";
+import { useWeb3React } from "@web3-react/core";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  marketContractAddress,
-  marketContractInterface,
-} from "../util/Constants";
-
-const contract = new Contract(marketContractAddress, marketContractInterface);
+import marketInterface from "../abi/Market.json";
+import { marketContractAddress } from "../util/Constants";
 
 const ListEvent = function () {
+  const web3 = useWeb3React();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const [eventName, setEventName] = useState("");
@@ -27,9 +22,7 @@ const ListEvent = function () {
   const handleChecked = () => {
     setCanResell(!canResell);
   };
-  const { state, send } = useContractFunction(contract, "listEvent", {
-    transactionName: "listEvent",
-  });
+
   const notify = (message, isError) => {
     if (!isError) {
       toast.success(message, {
@@ -56,34 +49,36 @@ const ListEvent = function () {
     }
   };
   const list = async () => {
-    setLoading(true);
-    try {
-      await send(
-        eventName,
-        eventSymbol,
-        capacity,
-        canResell,
-        resellCut,
-        price,
-        {
-          value: ethers.utils.parseEther("0.00024"),
-        }
+    if (web3.library === undefined) {
+      notify(
+        "Looks like everything is quite set up yet, please wait a minute and try again",
+        true
       );
-      if (state.status === "Success") {
-        notify("Event listed successfully", false);
-      } else if (state.status === "Exception" || state.status === "Fail") {
-        const fullErrorMessage = state["errorMessage"];
-        const relevantErrorMessage = fullErrorMessage.split("revert")[1];
-        notify(relevantErrorMessage, true);
-      } else {
-        notify("Something went wrong", true);
-      }
-    } catch (err) {
-      console.log(err);
-      notify("Something went wrong", true);
+    }
+    const marketContract = new web3.library.eth.Contract(
+      marketInterface.abi,
+      marketContractAddress
+    );
+    try {
+      const tx = await marketContract.methods
+        .listEvent(
+          eventName,
+          eventSymbol,
+          capacity,
+          canResell,
+          resellCut,
+          price
+        )
+        .send({
+          from: web3.account,
+          value: web3.library.utils.toWei("0.00025", "ether"),
+        });
+      console.log(tx);
+      notify("Event Listed successfully", false);
+    } catch (error) {
+      notify(error.message, true);
     }
   };
-
   return (
     <>
       <Header />

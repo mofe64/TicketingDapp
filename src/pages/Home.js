@@ -1,15 +1,33 @@
 import Header from "../components/Header";
 import "../css/pages/Home.css";
 import { useWeb3React } from "@web3-react/core";
+import { useCallback, useEffect, useState } from "react";
+import marketInterface from "../abi/Market.json";
+import { marketContractAddress } from "../util/Constants";
 
 const Home = function () {
   const web3 = useWeb3React();
-  const latestEvents = [];
-  const allEvents = [];
+  const [latestEvents, setLatestEvents] = useState([]);
   const owner = "xxx";
   if (web3.library !== undefined) {
     console.log(web3.library.utils.fromWei("2000000000", "ether"));
+    console.log(web3.chainId);
   }
+  const loadData = useCallback(async () => {
+    if (web3.library === undefined) return;
+    const marketContract = new web3.library.eth.Contract(
+      marketInterface.abi,
+      marketContractAddress
+    );
+    let allEvents = await marketContract.methods.getAllEvents().call();
+    let arrangedEvents = [...allEvents];
+    arrangedEvents = arrangedEvents.reverse().splice(-15);
+    setLatestEvents(arrangedEvents);
+  }, [web3.library]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
   return (
     <>
       <Header />
@@ -40,7 +58,7 @@ const Home = function () {
               })}
             </div>
           )}
-          {allEvents === undefined ||
+          {latestEvents === undefined ||
             (latestEvents.length === 0 && (
               <p>No events have been listed yet</p>
             ))}
