@@ -12,6 +12,7 @@ const Header = () => {
   return (
     <div className="header wrapper">
       <div className="header-links">
+        <Link to="/">Home </Link>
         <Link to="/new">Create An Event</Link>
         <p>Connected Account : {isActive ? account : ""}</p>
       </div>

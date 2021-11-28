@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Loader from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import marketInterface from "../abi/Market.json";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 import { marketContractAddress } from "../util/Constants";
 
 const ListEvent = function () {
@@ -19,6 +21,7 @@ const ListEvent = function () {
   const [canResell, setCanResell] = useState(true);
   const [resellCut, setResellCut] = useState(0);
   const [price, setPrice] = useState(0);
+  const [date, setDate] = useState();
   const handleChecked = () => {
     setCanResell(!canResell);
   };
@@ -61,6 +64,7 @@ const ListEvent = function () {
       marketContractAddress
     );
     try {
+      const eventDateInUnixTimeStamp = date.unix();
       const tx = await marketContract.methods
         .listEvent(
           eventName,
@@ -68,11 +72,14 @@ const ListEvent = function () {
           capacity,
           canResell,
           resellCut,
-          price
+          web3.library.utils.toWei(price.toString(), "ether"),
+          eventDateInUnixTimeStamp.toString()
         )
         .send({
           from: web3.account,
           value: web3.library.utils.toWei("0.00025", "ether"),
+          // value: web3.library.utils.toWei(price.toString(), "ether"),
+          gasPrice: "20000000000",
         });
       console.log(tx);
       setLoading(false);
@@ -107,6 +114,15 @@ const ListEvent = function () {
               placeholder="Event Symbol"
               value={eventSymbol}
               onChange={(e) => setEventSymbol(e.target.value)}
+            />
+          </div>
+          <div className="form-div">
+            <p>Enter the date of the event</p>
+            <Datetime
+              value={date}
+              onChange={(e) => {
+                setDate(e);
+              }}
             />
           </div>
           <div className="form-div">
@@ -146,8 +162,7 @@ const ListEvent = function () {
             <p>Enter the price per ticket</p>
             <input
               type="number"
-              placeholder="Resell Cut"
-              min={0}
+              placeholder="Price in Ether"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />

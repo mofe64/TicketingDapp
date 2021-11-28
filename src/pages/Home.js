@@ -49,7 +49,15 @@ const Home = function () {
                       Token Symbol : <span> {event["symbol"]}</span>{" "}
                     </p>
                     <p>
-                      Price :<span> {event["price"].toString()} </span>
+                      Price :
+                      <span>
+                        {" "}
+                        {web3.library.utils.fromWei(
+                          event["price"].toString(),
+                          "ether"
+                        )}{" "}
+                        Ether
+                      </span>
                     </p>
                     <div className="event-tile-btns">
                       <button
