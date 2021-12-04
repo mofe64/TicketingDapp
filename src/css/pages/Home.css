@@ -6,7 +6,7 @@
 }
 .event-tile {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
@@ -15,14 +15,43 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   cursor: pointer;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+}
+.tile {
+  display: flex;
+  /* width: 100%; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.2s linear;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  cursor: pointer;
+  /* margin-bottom: 1rem; */
 }
 .event-tile p {
   font-weight: bold;
   width: 20%;
 }
+.tile p {
+  font-weight: bold;
+}
+.tile p span {
+  color: gold;
+}
 .event-tile p span {
   color: gold;
+}
+.tile-btns button {
+  border: none;
+  outline: none;
+  padding: 0.7rem 2rem;
+  color: black;
+  background-color: gold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 1rem;
 }
 
 .event-tile-btns button {
@@ -39,4 +68,18 @@
 .btn-details {
   background-color: green !important;
   color: white !important;
+}
+
+@media (max-width: 750px) {
+  .event-tile {
+    flex-direction: column;
+    text-align: center;
+  }
+  .event-tile p {
+    width: 80%;
+  }
+  .tile {
+    flex-direction: column;
+    text-align: center;
+  }
 }

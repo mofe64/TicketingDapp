@@ -119,6 +119,7 @@ const ListEvent = function () {
           <div className="form-div">
             <p>Enter the date of the event</p>
             <Datetime
+              initialValue={Date.now()}
               value={date}
               onChange={(e) => {
                 setDate(e);
@@ -159,7 +160,7 @@ const ListEvent = function () {
             />
           </div>
           <div className="form-div">
-            <p>Enter the price per ticket</p>
+            <p>Enter the price per ticket in Ether</p>
             <input
               type="number"
               placeholder="Price in Ether"
