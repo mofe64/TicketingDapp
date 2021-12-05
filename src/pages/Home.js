@@ -45,8 +45,29 @@ const Home = function () {
       });
     }
   };
+  const noEthNotify = (message) => {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   const loadData = useCallback(async () => {
+    if (
+      web3.error !== undefined &&
+      web3.error.name === "NoEthereumProviderError"
+    ) {
+      console.log(web3.error.message);
+      noEthNotify(
+        "No Ethereum provider was found for this browser \n If on a desktop kindly download the metamask browser extension and set up your wallet to continue \n If on a mobile device, kindly download the metamask app, and use the metamask browser to proceed"
+      );
+      return;
+    }
     if (web3.library === undefined) return;
     const marketContract = new web3.library.eth.Contract(
       marketInterface.abi,
@@ -63,7 +84,7 @@ const Home = function () {
     let arrangedEvents = [...allEvents];
     arrangedEvents = arrangedEvents.reverse().splice(-15);
     setLatestEvents(arrangedEvents);
-  }, [web3.library, web3.chainId]);
+  }, [web3.library, web3.chainId, web3.error]);
 
   const loadTickets = useCallback(async () => {
     if (web3.library === undefined) return;

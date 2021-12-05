@@ -1,4 +1,3 @@
-// import { useEthers } from "@usedapp/core";
 import { Link } from "react-router-dom";
 import "../css/components/Header.css";
 import useMetaMask from "../hooks/useMetaMask";
@@ -6,7 +5,6 @@ import useMetaMask from "../hooks/useMetaMask";
 const Header = () => {
   const { connect, disconnect, isActive, account } = useMetaMask();
 
-  // const { account, activateBrowserWallet, deactivate } = useEthers();
   const isConnected = account !== undefined;
 
   return (
