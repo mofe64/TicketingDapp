@@ -138,44 +138,47 @@ const Home = function () {
         <div className="events">
           <h1>Lastest Events</h1>
           <p>All the lastest events </p>
-          {latestEvents !== undefined && latestEvents.length > 0 && (
-            <div className="events-all">
-              {latestEvents.map((event, index) => {
-                // console.log(event);
-                return (
-                  <div className="event-tile" key={index}>
-                    <p>
-                      Event name : <span>{event["name"]}</span>
-                    </p>
-                    <p>
-                      Token Symbol : <span> {event["symbol"]}</span>{" "}
-                    </p>
-                    <p>
-                      Price :
-                      <span>
-                        {" "}
-                        {web3.library.utils.fromWei(
-                          event["price"].toString(),
-                          "ether"
-                        )}{" "}
-                        Ether
-                      </span>
-                    </p>
-                    <div className="event-tile-btns">
-                      <button
-                        className="btn-buy"
-                        onClick={() => {
-                          history.push(`/${event["id"]}`);
-                        }}
-                      >
-                        Buy Now
-                      </button>
+          {web3.library !== undefined &&
+            latestEvents !== undefined &&
+            latestEvents.length > 0 && (
+              <div className="events-all">
+                {latestEvents.map((event, index) => {
+                  // console.log(event);
+                  return (
+                    <div className="event-tile" key={index}>
+                      <p>
+                        Event name : <span>{event["name"]}</span>
+                      </p>
+                      <p>
+                        Token Symbol : <span> {event["symbol"]}</span>{" "}
+                      </p>
+                      <p>
+                        Price :
+                        <span>
+                          {" "}
+                          {web3.library.utils.fromWei(
+                            event["price"].toString(),
+                            "ether"
+                          )}{" "}
+                          Ether
+                        </span>
+                      </p>
+                      <div className="event-tile-btns">
+                        <button
+                          className="btn-buy"
+                          onClick={() => {
+                            history.push(`/${event["id"]}`);
+                          }}
+                        >
+                          Buy Now
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            )}
+          {web3.library === undefined && <p>Connect your Account to proceed</p>}
           {latestEvents === undefined ||
             (latestEvents.length === 0 && (
               <p>No events have been listed yet</p>
@@ -211,6 +214,9 @@ const Home = function () {
                     </div>
                   </div>
                 ))}
+                {web3.library === undefined && (
+                  <p>Connect your Account to proceed</p>
+                )}
                 {purchasedTickets.length === 0 && (
                   <p>You have not purchased any tickets Yet</p>
                 )}
@@ -221,7 +227,7 @@ const Home = function () {
         <div className="event">
           <h1>Your Events</h1>
           <p>A list of all the events you've listed</p>
-          {userEvents.length > 0 && (
+          {web3.library !== undefined && userEvents.length > 0 && (
             <div className="userevents-all">
               {userEvents.map((event, index) => (
                 <div className="tile" key={index}>
@@ -259,6 +265,7 @@ const Home = function () {
               ))}
             </div>
           )}
+          {web3.library === undefined && <p>Connect your account to proceed</p>}
           {userEvents.length === 0 && <p>You have not listed any events yet</p>}
         </div>
       </div>
