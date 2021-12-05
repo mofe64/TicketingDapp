@@ -58,6 +58,8 @@ const Home = function () {
   };
 
   const loadData = useCallback(async () => {
+    console.log("3 is", web3);
+    console.log("error is", web3.error);
     if (
       web3.error !== undefined &&
       web3.error.name === "NoEthereumProviderError"
