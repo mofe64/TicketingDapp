@@ -72,6 +72,9 @@ const Home = function () {
       marketContractAddress
     );
     let options = {
+      filter: {
+        from: web3.account,
+      },
       fromBlock: 0,
       toBlock: "latest",
     };
