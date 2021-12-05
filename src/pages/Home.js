@@ -188,7 +188,7 @@ const Home = function () {
           <h1>Your Tickets</h1>
           <p>All the tickets you currently own</p>
           <div className="tickets">
-            {purchasedTickets.length > 0 && (
+            {web3.library !== undefined && purchasedTickets.length > 0 && (
               <div className="tickets-all">
                 {purchasedTickets.map((ticket, index) => (
                   <div className="tile" key={index}>
