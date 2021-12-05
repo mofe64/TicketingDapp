@@ -73,7 +73,7 @@ const Home = function () {
     );
     let options = {
       filter: {
-        from: web3.account,
+        purchaserAddress: web3.account,
       },
       fromBlock: 0,
       toBlock: "latest",
