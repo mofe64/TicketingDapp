@@ -58,12 +58,13 @@ const Home = function () {
   };
 
   const loadData = useCallback(async () => {
-    console.log("3 is", web3);
     console.log("error is", web3.error);
     if (
       web3.error !== undefined &&
-      web3.error.name === "NoEthereumProviderError"
+      (web3.error.name === "NoEthereumProviderError" || web3.error.name === "t")
     ) {
+      console.log("getting here");
+      console.log("name is ", web3.error.name);
       console.log(web3.error.message);
       noEthNotify(
         "No Ethereum provider was found for this browser \n If on a desktop kindly download the metamask browser extension and set up your wallet to continue \n If on a mobile device, kindly download the metamask app, and use the metamask browser to proceed"
