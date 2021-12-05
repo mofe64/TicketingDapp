@@ -101,7 +101,7 @@ const Home = function () {
     });
     console.log(ticketsArr);
     setPurchasedTickets(ticketsArr);
-  }, [web3.library]);
+  }, [web3.library, web3.account]);
   const loadUserEvents = useCallback(async () => {
     if (web3.library === undefined) return;
     const marketContract = new web3.library.eth.Contract(

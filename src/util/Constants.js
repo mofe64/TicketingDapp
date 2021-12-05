@@ -6,6 +6,6 @@ export const marketContractInterface = new ethers.utils.Interface(
 );
 export const MarketContractAbi = marketAbi;
 // const LOCALCONTRACTADDRESS = "0x46C5716534ac941023498aa7DfBDD6EC3671cffc";
-const CURRENTLIVECONTRACTADDRESS = "0x0d2bB4D362024DD2b23b06903df9Aecc74303235";
+const CURRENTLIVECONTRACTADDRESS = "0xdAE7bf48B94Fc9Da6a3e33C1E8312A9B256c2fA9";
 
 export const marketContractAddress = CURRENTLIVECONTRACTADDRESS;

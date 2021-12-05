@@ -82,4 +82,8 @@
     flex-direction: column;
     text-align: center;
   }
+  .tile p {
+    word-break: break-all;
+    white-space: normal;
+  }
 }
